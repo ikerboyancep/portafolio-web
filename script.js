@@ -982,9 +982,17 @@ function buildProjectsGrid(projects) {
     { passive: false }
   );
 
-  carousel.appendChild(createCarouselHoverZone("prev", track));
+  const prevZone = createCarouselHoverZone("prev", track);
+  const nextZone = createCarouselHoverZone("next", track);
+
+  prevZone.addEventListener("mouseenter", () => startHoverScroll(-7));
+  nextZone.addEventListener("mouseenter", () => startHoverScroll(7));
+  prevZone.addEventListener("mouseleave", stopHoverScroll);
+  nextZone.addEventListener("mouseleave", stopHoverScroll);
+
+  carousel.appendChild(prevZone);
   carousel.appendChild(track);
-  carousel.appendChild(createCarouselHoverZone("next", track));
+  carousel.appendChild(nextZone);
 
   return carousel;
 }
