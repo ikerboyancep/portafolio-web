@@ -670,7 +670,7 @@ const PROJECTS = [
     titulo: "Ilustración Digital — Parcial 2",
     imagen: "Dib_Parcial2_IkerBoyance_Ilustración.jpg",
     descripcion:
-      "Ilustración digital enfocada en narrativa visual, iluminación dramática y acabado atmosférico dentro de una composición de formato panorámico.",
+      "Ilustración digital enfocada en concept y diversas pruebas de valor, color e iluminación",
     herramientas: "Photoshop",
   },
 
@@ -678,7 +678,7 @@ const PROJECTS = [
     titulo: "Dibujo Digital — Actividad 15",
     imagen: "Dib_Actividad15_IkerBoyance.png",
     descripcion:
-      "Pieza de dibujo digital desarrollada para explorar textura, lectura visual y construcción de una identidad gráfica con presencia editorial.",
+      "Pieza de dibujo digital desarrollada para explorar texturas, sombras y luces",
     herramientas: "Photoshop",
   },
 
