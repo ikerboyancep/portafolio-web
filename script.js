@@ -917,11 +917,39 @@ function createProjectCard(project) {
   return card;
 }
 
-function createCarouselHoverZone(direction, track) {
-  const zone = document.createElement("div");
-  zone.className = "projectCarouselHoverZone projectCarouselHoverZone--" + direction;
-  zone.setAttribute("aria-hidden", "true");
-  return zone;
+function animateCarouselScroll(track, distance) {
+  const start = track.scrollLeft;
+  const maxScroll = track.scrollWidth - track.clientWidth;
+  const target = Math.max(0, Math.min(maxScroll, start + distance));
+  const duration = 620;
+  const startTime = performance.now();
+
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const step = (now) => {
+    const progress = Math.min((now - startTime) / duration, 1);
+    track.scrollLeft = start + (target - start) * easeOutCubic(progress);
+
+    if (progress < 1) requestAnimationFrame(step);
+  };
+
+  requestAnimationFrame(step);
+}
+
+function createCarouselButton(direction, track) {
+  const button = document.createElement("button");
+  button.className = "projectCarouselArrow projectCarouselArrow--" + direction;
+  button.type = "button";
+  button.setAttribute("aria-label", direction === "prev" ? "Proyecto anterior" : "Proyecto siguiente");
+  button.textContent = direction === "prev" ? "‹" : "›";
+
+  button.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const distance = Math.min(track.clientWidth * 0.72, 760);
+    animateCarouselScroll(track, direction === "prev" ? -distance : distance);
+  });
+
+  return button;
 }
 
 function buildProjectsGrid(projects) {
@@ -933,45 +961,6 @@ function buildProjectsGrid(projects) {
 
   projects.forEach((project) => track.appendChild(createProjectCard(project)));
 
-  let hoverFrameId = null;
-  let hoverSpeed = 0;
-
-  const stopHoverScroll = () => {
-    hoverSpeed = 0;
-    if (!hoverFrameId) return;
-    cancelAnimationFrame(hoverFrameId);
-    hoverFrameId = null;
-  };
-
-  const hoverScroll = () => {
-    track.scrollLeft += hoverSpeed;
-    hoverFrameId = hoverSpeed === 0 ? null : requestAnimationFrame(hoverScroll);
-  };
-
-  const startHoverScroll = (speed) => {
-    hoverSpeed = speed;
-    if (hoverFrameId) return;
-    hoverFrameId = requestAnimationFrame(hoverScroll);
-  };
-
-  const handleHoverScroll = (event) => {
-    const rect = carousel.getBoundingClientRect();
-    const edgeSize = Math.min(140, rect.width * 0.18);
-
-    if (event.clientX < rect.left + edgeSize) {
-      startHoverScroll(-7);
-    } else if (event.clientX > rect.right - edgeSize) {
-      startHoverScroll(7);
-    } else {
-      stopHoverScroll();
-    }
-  };
-
-  carousel.addEventListener("mousemove", handleHoverScroll);
-  carousel.addEventListener("pointermove", handleHoverScroll);
-  carousel.addEventListener("mouseleave", stopHoverScroll);
-  carousel.addEventListener("pointerleave", stopHoverScroll);
-
   track.addEventListener(
     "wheel",
     (event) => {
@@ -982,17 +971,9 @@ function buildProjectsGrid(projects) {
     { passive: false }
   );
 
-  const prevZone = createCarouselHoverZone("prev", track);
-  const nextZone = createCarouselHoverZone("next", track);
-
-  prevZone.addEventListener("mouseenter", () => startHoverScroll(-7));
-  nextZone.addEventListener("mouseenter", () => startHoverScroll(7));
-  prevZone.addEventListener("mouseleave", stopHoverScroll);
-  nextZone.addEventListener("mouseleave", stopHoverScroll);
-
-  carousel.appendChild(prevZone);
+  carousel.appendChild(createCarouselButton("prev", track));
   carousel.appendChild(track);
-  carousel.appendChild(nextZone);
+  carousel.appendChild(createCarouselButton("next", track));
 
   return carousel;
 }
