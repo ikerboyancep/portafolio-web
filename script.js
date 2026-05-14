@@ -694,27 +694,48 @@ function createProjectsGrid() {
   });
 
   const proyectos = [
-    {
-      titulo: "Fractals (2025)",
-      video: "https://www.youtube.com/embed/rp6Q4swlmvE",
-      descripcion:
-        "Prototipo de FPS con gravedad omnidireccional y mecánicas reactivas a la música. Proyecto de desarrollo propio que integra concepto, programación y dirección audiovisual.",
-    },
-    {
-      titulo: "Uri — Menú principal (En desarrollo)",
-      video: "https://www.youtube.com/embed/JoyD_b_xtUA",
-      descripcion:
-        "Menú principal del proyecto Uri. Todo el contenido es de desarrollo propio, ilustración por Isa Choxóm.",
-    },
+  {
+    titulo: "Uri — Primera Demo (2026)",
+    video: "https://www.youtube.com/embed/dEJej40Inxo",
+    descripcion:
+      "Primera demostración jugable de Uri, explorando dirección visual, atmósfera interactiva y diseño de experiencia dentro del proyecto.",
+  },
 
-    {
-      titulo: "Hand Pattern Recognition System (En desarrollo)",
-      video: "https://www.youtube.com/embed/qgqHpcSFZDQ",
-      descripcion:
-        "Desarrollo experimental de un sistema de reconocimiento de patrones de la mano para interacción en entornos digitales utilizando únicamente la webcam. El modelo identifica articulaciones y gestos sin sensores adicionales, explorando aplicaciones en arte generativo, control por gestos y experiencias inmersivas. Música por Iker Boyancé.",
-    },
+  {
+    titulo: "Clip de Rotoscopia (2026)",
+    video: "https://www.youtube.com/embed/RMnEIsnHzgY",
+    descripcion:
+      "Clip experimental de rotoscopia digital enfocado en movimiento, composición visual y atmósfera cinematográfica.",
+  },
 
-  ];
+  {
+    titulo: "Walk Cycle + Parallax (2026)",
+    video: "https://www.youtube.com/embed/uwqp9ZimmWw",
+    descripcion:
+      "Animación 2D con walk cycle y efecto parallax para generar profundidad y movimiento cinematográfico dentro del escenario.",
+  },
+
+  {
+    titulo: "Hand Pattern Recognition System (En desarrollo)",
+    video: "https://www.youtube.com/embed/qgqHpcSFZDQ",
+    descripcion:
+      "Desarrollo experimental de un sistema de reconocimiento de patrones de la mano para interacción en entornos digitales utilizando únicamente la webcam. El modelo identifica articulaciones y gestos sin sensores adicionales, explorando aplicaciones en arte generativo, control por gestos y experiencias inmersivas. Música por Iker Boyancé.",
+  },
+
+  {
+    titulo: "Uri — Menú principal (2025)",
+    video: "https://www.youtube.com/embed/JoyD_b_xtUA",
+    descripcion:
+      "Menú principal del proyecto Uri. Todo el contenido es de desarrollo propio, ilustración por Isa Choxóm.",
+  },
+
+  {
+    titulo: "Fractals (2025)",
+    video: "https://www.youtube.com/embed/rp6Q4swlmvE",
+    descripcion:
+      "Prototipo de FPS con gravedad omnidireccional y mecánicas reactivas a la música. Proyecto de desarrollo propio que integra concepto, programación y dirección audiovisual.",
+  },
+];
 
   proyectos.forEach((p) => {
     const card = document.createElement("div");
